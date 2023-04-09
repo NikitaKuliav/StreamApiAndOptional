@@ -1,6 +1,7 @@
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,6 +15,8 @@ public class Main {
         Comparator<Car> carComparator = Comparator.comparing(Car::getModel).thenComparing(Car::getYear);
         Comparator<String> comparator = Comparator.comparing(String::length);
         findMinMax(carStream, carComparator, biConsumer);
+
+        findCountEvenNums(List.of(1,2,3,4,5,6,7,8,9,120));
 
     }
 
@@ -29,6 +32,14 @@ public class Main {
             minMaxConsumer.accept(list.get(0), list.get(list.size()-1));
         }
     }
+
+
+        public static void findCountEvenNums(List<Integer> list){
+            Stream<Integer> stream = list.stream();
+            Predicate<Integer> predicate = (n) -> (n % 2) == 0;
+            Stream<Integer> resStream = stream.filter((n) -> (n % 2) == 0);
+            System.out.println("Количество четных чисел: " + resStream.count());
+        }
 
 
 
