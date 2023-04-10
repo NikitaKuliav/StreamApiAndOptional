@@ -24,11 +24,10 @@ public class Main {
             Stream<? extends T> stream,
             Comparator<? super T> order,
             BiConsumer<? super T, ? super T> minMaxConsumer){
-        List<T> list = stream.collect(Collectors.toList());
+        List<T> list = stream.sorted(order).collect(Collectors.toList());
         if (list.isEmpty()) {
             minMaxConsumer.accept(null, null);
         }else {
-            list.sort(order);
             minMaxConsumer.accept(list.get(0), list.get(list.size()-1));
         }
     }
@@ -37,8 +36,10 @@ public class Main {
         public static void findCountEvenNums(List<Integer> list){
             Stream<Integer> stream = list.stream();
             Predicate<Integer> predicate = (n) -> (n % 2) == 0;
-            Stream<Integer> resStream = stream.filter((n) -> (n % 2) == 0);
-            System.out.println("Количество четных чисел: " + resStream.count());
+            long numbersQuantity = list.stream()
+                    .filter((n) -> (n % 2) == 0)
+                    .count();
+            System.out.println("Количество четных чисел: " + numbersQuantity);
         }
 
 
