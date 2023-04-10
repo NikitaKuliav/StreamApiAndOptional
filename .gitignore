@@ -1,1 +1,3 @@
-/StreamApiAndOptional.iml
+*.iml
+/.idea/
+/out/
